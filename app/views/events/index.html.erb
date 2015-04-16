@@ -1,0 +1,26 @@
+<h2>Todo List</h2>
+<ul>
+<% @events.each do |event| %>
+  <li>
+ 	<%= event.name %>
+ 	<%= finish(event)%>
+ 	<%= link_to 'Edit', edit_event_path(event) %>
+  	<%= link_to 'Delete', event_path(event), method:"delete" %>
+	<%= button_to btn_name(event), complete_event_path(event) %><br>
+  </li>
+<% end %>
+</ul>
+<%= link_to 'New Event', new_event_path %>
+
+
+<%=form_tag events_path,method:"get" do%>
+<%=hidden_field_tag :status1,false%>
+<%=submit_tag"undo"%>
+<% end%>
+
+<%=form_tag events_path,method:"get" do%>
+<%=hidden_field_tag :status2,true%>
+<%=submit_tag"done"%>
+<% end%>
+
+<%= button_to "All",events_path,method:"get"%>
