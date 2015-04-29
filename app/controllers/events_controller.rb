@@ -7,6 +7,7 @@ class EventsController < ApplicationController
 		if params[:status2].present?
 			@events=@events.where(:status => true)
 		end
+		@events=@events.page(params[:page]).per(3)
 	end
 	def new
 		@event=Event.new

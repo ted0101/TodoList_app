@@ -1,4 +1,11 @@
 <h2>Todo List</h2>
+<% if user_signed_in?%>
+<%= current_user.name%> Hello
+<%= link_to "登出",destroy_user_session_path, method:"delete" %>
+<% else%>
+<%= link_to "註冊", new_user_registration_path %>
+<%= link_to "登入", new_user_session_path %>	
+<% end%>
 <ul>
 <% @events.each do |event| %>
   <li>
@@ -9,6 +16,7 @@
 	<%= button_to btn_name(event), complete_event_path(event) %><br>
   </li>
 <% end %>
+<%= paginate @events %>
 </ul>
 <%= link_to 'New Event', new_event_path %>
 
